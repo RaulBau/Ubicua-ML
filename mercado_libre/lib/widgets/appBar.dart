@@ -16,6 +16,8 @@ class _AppbarMLState extends State<AppbarML> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      actionsIconTheme: IconThemeData(color: colores['grisOscuro']),
+      iconTheme: IconThemeData(color: colores['grisOscuro']),
       backgroundColor: colores['amarillo'],
       elevation: 0,
     );

@@ -15,6 +15,6 @@ class DrawerML extends StatelessWidget implements Drawer {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return DrawerML();
   }
 }
