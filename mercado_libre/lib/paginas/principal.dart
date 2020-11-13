@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:mercado_libre/main.dart';
 import 'package:mercado_libre/paginas/login.dart';
@@ -102,11 +101,150 @@ class _PrincipalState extends State<Principal> {
               },
             ),
           ),
-          IconoCategoria(
-            icono: Icons.shop,
-            colorFondo: Colors.white,
-            diametro: 55,
-            nombre: "Compras Compras Compras Compras ",
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconoCategoria(
+                  icono: Icons.qr_code_outlined,
+                  colorFondo: Colors.white,
+                  diametro: 55,
+                  nombre: "Pagar con QR",
+                ),
+                IconoCategoria(
+                  icono: Icons.label,
+                  colorFondo: Colors.white,
+                  diametro: 55,
+                  nombre: "Ofertas",
+                ),
+                IconoCategoria(
+                  icono: Icons.shopping_basket,
+                  colorFondo: Colors.white,
+                  diametro: 55,
+                  nombre: "Supermercado",
+                ),
+                IconoCategoria(
+                  icono: Icons.car_repair,
+                  colorFondo: Colors.white,
+                  diametro: 55,
+                  nombre: "Autos, motos y otros",
+                ),
+                IconoCategoria(
+                  icono: Icons.add,
+                  colorFondo: Colors.white,
+                  diametro: 55,
+                  nombre: "Ver más",
+                ),
+              ],
+            ),
+          ),
+          Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Visto recientemente',
+                        style: TextStyle(
+                            color: colores['grisOscuro'],
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  color: Color(0xfff2f2f2),
+                  height: 3,
+                  thickness: 2,
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    FadeInImage(
+                      fit: BoxFit.cover,
+                      placeholder: Image.asset(
+                        'assets/carga.png',
+                        fit: BoxFit.cover,
+                      ).image,
+                      image: NetworkImage(
+                          'https://http2.mlstatic.com/D_NQ_NP_2X_978094-MLM31368159703_072019-F.webp'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 5),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Control Classic Gamepad Nintendo Wii Alambrico Nuevo',
+                              style: TextStyle(
+                                  color: colores['grisOscuro'],
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 5),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text.rich(
+                              TextSpan(
+                                text: '\$ 240',
+                                children: [
+                                  WidgetSpan(
+                                    child: Transform.translate(
+                                      offset: const Offset(2, -2),
+                                      child: Text(
+                                        '81  ',
+                                        textScaleFactor: 0.8,
+                                        style: TextStyle(
+                                            color: colores['grisOscuro']),
+                                      ),
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: '31% OFF',
+                                    children: [],
+                                    style: TextStyle(
+                                        color: colores['verde'],
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                                style: TextStyle(
+                                    color: colores['grisOscuro'],
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            elevation: 10,
+          ),
+          SizedBox(
+            height: 50,
           ),
         ],
       ),

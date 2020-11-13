@@ -8,7 +8,8 @@ final colores = {
   "lila": Color(0xffED195B),
   "grisOscuro": Color(0xff333333),
   "grisClaro": Color(0xffCCCCCC),
-  "azul": Color(0xff2D3277)
+  "azul": Color(0xff2D3277),
+  "verde": Color(0xff00a650),
 };
 
 class MyApp extends StatelessWidget {
