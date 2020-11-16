@@ -9,6 +9,7 @@ final colores = {
   "grisOscuro": Color(0xff333333),
   "grisClaro": Color(0xffCCCCCC),
   "azul": Color(0xff2D3277),
+  "azulClaro": Color(0xff3483fa),
   "verde": Color(0xff00a650),
 };
 
