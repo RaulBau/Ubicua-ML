@@ -55,13 +55,18 @@ class TarjetaArticulo extends StatelessWidget {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              FadeInImage(
-                fit: BoxFit.cover,
-                placeholder: Image.asset(
-                  'assets/carga.png',
+              FlatButton(
+                onPressed: () {},
+                padding: EdgeInsets.zero,
+                child: FadeInImage(
                   fit: BoxFit.cover,
-                ).image,
-                image: NetworkImage(this.imagen),height: 300,
+                  placeholder: Image.asset(
+                    'assets/carga.png',
+                    fit: BoxFit.cover,
+                  ).image,
+                  image: NetworkImage(this.imagen),
+                  height: 300,
+                ),
               ),
               Padding(
                 padding:
@@ -200,7 +205,7 @@ class TarjetaArticulo extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                      this.boton ,
+                        this.boton,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: colores['azulClaro'], fontSize: 15),
