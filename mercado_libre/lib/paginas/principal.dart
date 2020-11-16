@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:mercado_libre/main.dart';
 import 'package:mercado_libre/paginas/login.dart';
 import 'package:mercado_libre/widgets/appBar.dart';
+import 'package:mercado_libre/widgets/categorias.dart';
+import 'package:mercado_libre/widgets/drawer.dart';
 import 'package:mercado_libre/widgets/iconoCategoria.dart';
+import 'package:mercado_libre/widgets/tarjetaArticulo.dart';
 import 'package:mercado_libre/widgets/tarjetaSlider.dart';
 
 class Principal extends StatefulWidget {
@@ -14,6 +17,7 @@ class Principal extends StatefulWidget {
 
 class _PrincipalState extends State<Principal> {
   PageController pageController;
+  GlobalKey pageKey = GlobalKey();
 
   Timer timer;
 
@@ -32,8 +36,9 @@ class _PrincipalState extends State<Principal> {
       initialPage: 5,
     );
     timer = Timer.periodic(Duration(seconds: 5), (timer) {
-      pageController.nextPage(
-          duration: Duration(milliseconds: 600), curve: Curves.ease);
+      pageController
+          .nextPage(duration: Duration(milliseconds: 600), curve: Curves.ease)
+          .catchError(() {});
     });
     super.initState();
   }
@@ -48,33 +53,15 @@ class _PrincipalState extends State<Principal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppbarML(),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            UserAccountsDrawerHeader(
-              currentAccountPicture: IconButton(
-                  iconSize: 45,
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) {
-                          return Login();
-                        },
-                        settings: RouteSettings(name: Login.routeName)));
-                  },
-                  icon: CircleAvatar(
-                    radius: 40,
-                    backgroundImage: Image.network(
-                      'https://cdn.discordapp.com/attachments/544378436156915714/755288728443813888/tu2.png',
-                    ).image,
-                  )),
-              accountName: Text(''),
-              accountEmail: Text(''),
-              decoration: BoxDecoration(color: colores['amarillo']),
-            ),
-          ],
-        ),
+      appBar: AppbarML(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart_outlined),
+            onPressed: () {},
+          ),
+        ],
       ),
+      drawer: DrawerML(),
       body: ListView(
         children: [
           Container(
@@ -90,6 +77,7 @@ class _PrincipalState extends State<Principal> {
             height: 170,
             width: double.infinity,
             child: PageView.builder(
+              key: pageKey,
               itemBuilder: (context, index) {
                 return paginasSlider[index % paginasSlider.length];
               },
@@ -101,147 +89,32 @@ class _PrincipalState extends State<Principal> {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconoCategoria(
-                  icono: Icons.qr_code_outlined,
-                  colorFondo: Colors.white,
-                  diametro: 55,
-                  nombre: "Pagar con QR",
-                ),
-                IconoCategoria(
-                  icono: Icons.label,
-                  colorFondo: Colors.white,
-                  diametro: 55,
-                  nombre: "Ofertas",
-                ),
-                IconoCategoria(
-                  icono: Icons.shopping_basket,
-                  colorFondo: Colors.white,
-                  diametro: 55,
-                  nombre: "Supermercado",
-                ),
-                IconoCategoria(
-                  icono: Icons.car_repair,
-                  colorFondo: Colors.white,
-                  diametro: 55,
-                  nombre: "Autos, motos y otros",
-                ),
-                IconoCategoria(
-                  icono: Icons.add,
-                  colorFondo: Colors.white,
-                  diametro: 55,
-                  nombre: "Ver más",
-                ),
-              ],
-            ),
+          Categorias(),
+          TarjetaArticulo(
+            imagen:
+                'https://http2.mlstatic.com/D_NQ_NP_2X_978094-MLM31368159703_072019-F.webp',
+            titulo: 'Visto recientemente',
+            nombre: 'Control Classic Gamepad Nintendo Wii Alambrico Nuevo',
+            precio: '240',
+            centavos: '81',
+            descuento: '31',
+            meses: '12',
+            precioMeses: '24',
+            centavosMeses: '18',
+            boton: 'Ver historial de navegación',
           ),
-          Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Visto recientemente',
-                        style: TextStyle(
-                            color: colores['grisOscuro'],
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  color: Color(0xfff2f2f2),
-                  height: 3,
-                  thickness: 2,
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    FadeInImage(
-                      fit: BoxFit.cover,
-                      placeholder: Image.asset(
-                        'assets/carga.png',
-                        fit: BoxFit.cover,
-                      ).image,
-                      image: NetworkImage(
-                          'https://http2.mlstatic.com/D_NQ_NP_2X_978094-MLM31368159703_072019-F.webp'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15.0, vertical: 5),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Control Classic Gamepad Nintendo Wii Alambrico Nuevo',
-                              style: TextStyle(
-                                  color: colores['grisOscuro'],
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15.0, vertical: 5),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text.rich(
-                              TextSpan(
-                                text: '\$ 240',
-                                children: [
-                                  WidgetSpan(
-                                    child: Transform.translate(
-                                      offset: const Offset(2, -2),
-                                      child: Text(
-                                        '81  ',
-                                        textScaleFactor: 0.8,
-                                        style: TextStyle(
-                                            color: colores['grisOscuro']),
-                                      ),
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: '31% OFF',
-                                    children: [],
-                                    style: TextStyle(
-                                        color: colores['verde'],
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
-                                style: TextStyle(
-                                    color: colores['grisOscuro'],
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            elevation: 10,
+          TarjetaArticulo(
+            imagen:
+                'https://http2.mlstatic.com/D_NQ_NP_2X_777618-MLA43485074635_092020-F.webp',
+            titulo: 'Oferta del día',
+            nombre: 'Motorola One Fusion+ 128 GB twilight blue 4 GB RAM',
+            precio: '6,745',
+            centavos: '00',
+            descuento: '10',
+            meses: '12',
+            precioMeses: '562',
+            centavosMeses: '08',
+            boton: 'Ver todas las ofertas',
           ),
           SizedBox(
             height: 50,

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mercado_libre/main.dart';
+import 'package:mercado_libre/widgets/barraBusqueda.dart';
 import 'package:mercado_libre/widgets/search_delegate.dart';
 
 class AppbarML extends StatefulWidget implements PreferredSizeWidget {
-  AppbarML({Key key})
-      : preferredSize = Size.fromHeight(kToolbarHeight * 1.8),
+  final List<Widget> actions;
+  final String direccion;
+  AppbarML({
+    Key key,
+    this.actions,
+    this.direccion = 'Ingresa tu código postal',
+  })  : preferredSize = Size.fromHeight(kToolbarHeight * 1.8),
         super(key: key);
 
   @override
@@ -20,41 +26,9 @@ class _AppbarMLState extends State<AppbarML> {
       actionsIconTheme: IconThemeData(color: colores['grisOscuro']),
       iconTheme: IconThemeData(color: colores['grisOscuro']),
       backgroundColor: colores['amarillo'],
-      title: FlatButton(
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        onPressed: () {
-          showSearch(context: context, delegate: ProductSearch());
-        },
-        child: Row(
-          children: [
-            Icon(
-              Icons.search_outlined,
-              color: colores['grisClaro'],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Text(
-                'Buscar en Mercado Libre',
-                style: TextStyle(
-                    color: colores['grisClaro'], fontWeight: FontWeight.w400),
-              ),
-            ),
-          ],
-        ),
-        color: Colors.white,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
+      title: BarraBusqueda(),
       elevation: 0,
-      actions: [
-        IconButton(
-          icon: Icon(Icons.shopping_cart_outlined),
-          onPressed: () {},
-        ),
-      ],
+      actions: this.widget.actions,
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: MaterialButton(
@@ -70,7 +44,7 @@ class _AppbarMLState extends State<AppbarML> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Text(
-                  'Ingresa tu código postal',
+                  widget.direccion,
                   style: TextStyle(
                       color: colores['grisOscuro'],
                       fontWeight: FontWeight.w400,
