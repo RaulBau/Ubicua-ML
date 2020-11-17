@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mercado_libre/main.dart';
-import 'package:mercado_libre/paginas/login.dart';
 import 'package:mercado_libre/widgets/appBar.dart';
+import 'package:mercado_libre/widgets/barraBusqueda.dart';
 import 'package:mercado_libre/widgets/categorias.dart';
 import 'package:mercado_libre/widgets/drawer.dart';
-import 'package:mercado_libre/widgets/iconoCategoria.dart';
 import 'package:mercado_libre/widgets/tarjetaArticulo.dart';
 import 'package:mercado_libre/widgets/tarjetaSlider.dart';
 
@@ -27,6 +26,46 @@ class _PrincipalState extends State<Principal> {
     TarjetaSlider(imagen: 'assets/3.jpg'),
     TarjetaSlider(imagen: 'assets/4.jpg'),
     TarjetaSlider(imagen: 'assets/5.jpg'),
+  ];
+
+  var articulos = [
+    {
+      'imagen':
+          'https://http2.mlstatic.com/D_NQ_NP_2X_978094-MLM31368159703_072019-F.webp',
+      'nombre': 'Control Classic Gamepad Nintendo Wii Alambrico Nuevo',
+      'precio': '240',
+      'centavos': '81',
+      'descuento': '31',
+      'meses': '12',
+      'precioMeses': '24',
+      'centavosMeses': '18',
+      'imagenes': [
+        'https://http2.mlstatic.com/D_NQ_NP_2X_978094-MLM31368159703_072019-F.webp',
+        'https://http2.mlstatic.com/D_NQ_NP_2X_845594-MLM43677590269_102020-F.webp',
+        'https://http2.mlstatic.com/D_NQ_NP_2X_721351-MLM43677612011_102020-F.webp',
+        'https://http2.mlstatic.com/D_NQ_NP_2X_815758-MLM43677595245_102020-F.webp',
+        'https://http2.mlstatic.com/D_NQ_NP_2X_834147-MLM43677567418_102020-F.webp',
+        'https://http2.mlstatic.com/D_NQ_NP_2X_626777-MLM43677555518_102020-F.webp',
+      ]
+    },
+    {
+      'imagen':
+          'https://http2.mlstatic.com/D_NQ_NP_2X_777618-MLA43485074635_092020-F.webp',
+      'nombre': 'Motorola One Fusion+ 128 GB twilight blue 4 GB RAM',
+      'precio': '6,745',
+      'centavos': '00',
+      'descuento': '10',
+      'meses': '12',
+      'precioMeses': '562',
+      'centavosMeses': '08',
+      'imagenes': [
+        'https://http2.mlstatic.com/D_NQ_NP_2X_777618-MLA43485074635_092020-F.webp',
+        'https://http2.mlstatic.com/D_NQ_NP_2X_819368-MLA43485074636_092020-F.webp',
+        'https://http2.mlstatic.com/D_NQ_NP_2X_697975-MLA43485074637_092020-F.webp',
+        'https://http2.mlstatic.com/D_NQ_NP_2X_847377-MLA43485074639_092020-F.webp',
+        'https://http2.mlstatic.com/D_NQ_NP_2X_709231-MLA43485157395_092020-F.webp'
+      ]
+    },
   ];
 
   @override
@@ -54,6 +93,7 @@ class _PrincipalState extends State<Principal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppbarML(
+        title: BarraBusqueda(),
         actions: [
           IconButton(
             icon: Icon(Icons.shopping_cart_outlined),
@@ -91,29 +131,13 @@ class _PrincipalState extends State<Principal> {
           ),
           Categorias(),
           TarjetaArticulo(
-            imagen:
-                'https://http2.mlstatic.com/D_NQ_NP_2X_978094-MLM31368159703_072019-F.webp',
             titulo: 'Visto recientemente',
-            nombre: 'Control Classic Gamepad Nintendo Wii Alambrico Nuevo',
-            precio: '240',
-            centavos: '81',
-            descuento: '31',
-            meses: '12',
-            precioMeses: '24',
-            centavosMeses: '18',
+            articulo: articulos[0],
             boton: 'Ver historial de navegación',
           ),
           TarjetaArticulo(
-            imagen:
-                'https://http2.mlstatic.com/D_NQ_NP_2X_777618-MLA43485074635_092020-F.webp',
             titulo: 'Oferta del día',
-            nombre: 'Motorola One Fusion+ 128 GB twilight blue 4 GB RAM',
-            precio: '6,745',
-            centavos: '00',
-            descuento: '10',
-            meses: '12',
-            precioMeses: '562',
-            centavosMeses: '08',
+            articulo: articulos[1],
             boton: 'Ver todas las ofertas',
           ),
           SizedBox(
