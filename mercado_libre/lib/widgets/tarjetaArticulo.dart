@@ -1,28 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mercado_libre/main.dart';
+import 'package:mercado_libre/paginas/producto.dart';
 
 class TarjetaArticulo extends StatelessWidget {
-  final String imagen;
   final String titulo;
-  final String nombre;
-  final String precio;
-  final String centavos;
-  final String descuento;
-  final String meses;
-  final String precioMeses;
-  final String centavosMeses;
   final String boton;
+  final articulo;
   const TarjetaArticulo({
-    @required this.imagen,
     @required this.titulo,
-    @required this.nombre,
-    @required this.precio,
-    @required this.centavos,
-    @required this.descuento,
-    @required this.meses,
-    @required this.precioMeses,
-    @required this.centavosMeses,
     @required this.boton,
+    @required this.articulo,
     Key key,
   }) : super(key: key);
 
@@ -56,7 +43,13 @@ class TarjetaArticulo extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) {
+                        return Producto(this.articulo);
+                      },
+                      settings: RouteSettings(name: Producto.routeName)));
+                },
                 padding: EdgeInsets.zero,
                 child: FadeInImage(
                   fit: BoxFit.cover,
@@ -64,7 +57,7 @@ class TarjetaArticulo extends StatelessWidget {
                     'assets/carga.png',
                     fit: BoxFit.cover,
                   ).image,
-                  image: NetworkImage(this.imagen),
+                  image: NetworkImage(this.articulo['imagen']),
                   height: 300,
                 ),
               ),
@@ -75,7 +68,7 @@ class TarjetaArticulo extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        this.nombre,
+                        this.articulo['nombre'],
                         style: TextStyle(
                             color: colores['grisOscuro'],
                             fontSize: 12,
@@ -94,13 +87,13 @@ class TarjetaArticulo extends StatelessWidget {
                     Expanded(
                       child: Text.rich(
                         TextSpan(
-                          text: '\$ ${this.precio}',
+                          text: '\$ ${this.articulo['precio']}',
                           children: [
                             WidgetSpan(
                               child: Transform.translate(
                                 offset: const Offset(2, -2),
                                 child: Text(
-                                  '${this.centavos}  ',
+                                  '${this.articulo['centavos']}  ',
                                   textScaleFactor: 0.8,
                                   style:
                                       TextStyle(color: colores['grisOscuro']),
@@ -108,7 +101,7 @@ class TarjetaArticulo extends StatelessWidget {
                               ),
                             ),
                             TextSpan(
-                              text: '${this.descuento}% OFF',
+                              text: '${this.articulo['descuento']}% OFF',
                               children: [],
                               style: TextStyle(
                                   color: colores['verde'],
@@ -135,16 +128,18 @@ class TarjetaArticulo extends StatelessWidget {
                     Expanded(
                       child: Text.rich(
                         TextSpan(
-                          text: '${this.meses}x \$ ${this.precioMeses}',
+                          text:
+                              '${this.articulo['meses']}x \$ ${this.articulo['precioMeses']}',
                           children: [
                             WidgetSpan(
                               child: Transform.translate(
                                 offset: const Offset(2, -2),
-                                child: Text('${this.centavosMeses}  ',
-                                    textScaleFactor: 0.8,
-                                    style: TextStyle(
-                                      color: colores['verde'],
-                                    )),
+                                child:
+                                    Text('${this.articulo['centavosMeses']}  ',
+                                        textScaleFactor: 0.8,
+                                        style: TextStyle(
+                                          color: colores['verde'],
+                                        )),
                               ),
                             ),
                             TextSpan(
