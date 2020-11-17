@@ -23,33 +23,6 @@ class DrawerML extends StatelessWidget implements Drawer {
     return Drawer(
       child: ListView(
         children: [
-          // UserAccountsDrawerHeader(
-          //   currentAccountPicture: Row(
-          //     children: [
-          //       IconButton(
-          //           iconSize: 45,
-          //           onPressed: () {
-          //             Navigator.of(context).push(MaterialPageRoute(
-          //                 builder: (context) {
-          //                   return Login();
-          //                 },
-          //                 settings: RouteSettings(name: Login.routeName)));
-          //           },
-          //           icon: CircleAvatar(
-          //             radius: 40,
-          //             backgroundImage: Image.network(
-          //               'https://cdn.discordapp.com/attachments/544378436156915714/755288728443813888/tu2.png',
-          //             ).image,
-          //           )),
-          //       Column(
-          //         children: [Text('Hola Raúl')],
-          //       )
-          //     ],
-          //   ),
-          //   accountName: Text(''),
-          //   accountEmail: Text(''),
-          //   decoration: BoxDecoration(color: colores['amarillo']),
-          // ),
           Container(
             padding: EdgeInsets.all(15),
             child: Column(
@@ -133,7 +106,7 @@ class DrawerML extends StatelessWidget implements Drawer {
                       ),
                       Expanded(
                         child: Text(
-                          'Cantidad: ',
+                          'Mercado Pago',
                           style: TextStyle(
                               color: colores['grisOscuro'], fontSize: 15),
                         ),
@@ -152,6 +125,7 @@ class DrawerML extends StatelessWidget implements Drawer {
           ItemDrawer(
             icono: Icons.home_outlined,
             titulo: 'Inicio',
+            nuevo: true,
             onTap: () {
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) {
@@ -163,6 +137,7 @@ class DrawerML extends StatelessWidget implements Drawer {
           ItemDrawer(
             icono: Icons.shopping_bag_outlined,
             titulo: 'Mis compras',
+            nuevo: true,
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) {
@@ -174,6 +149,7 @@ class DrawerML extends StatelessWidget implements Drawer {
           ItemDrawer(
             icono: Icons.account_circle_outlined,
             titulo: 'Mi cuenta',
+            nuevo: true,
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) {
