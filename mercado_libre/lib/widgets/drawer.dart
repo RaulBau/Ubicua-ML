@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mercado_libre/main.dart';
 import 'package:mercado_libre/paginas/login.dart';
+import 'package:mercado_libre/paginas/principal.dart';
 
 class DrawerML extends StatelessWidget implements Drawer {
   DrawerML({Key key})
@@ -40,7 +41,16 @@ class DrawerML extends StatelessWidget implements Drawer {
             accountEmail: Text(''),
             decoration: BoxDecoration(color: colores['amarillo']),
           ),
-          ItemDrawer(icono: Icons.home_outlined, titulo: 'Inicio'),
+          ItemDrawer(
+            icono: Icons.home_outlined,
+            titulo: 'Inicio',
+            onTap: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) {
+                return Principal();
+              }), (route) => false);
+            },
+          ),
           ItemDrawer(icono: Icons.search_outlined, titulo: 'Buscar'),
           ItemDrawer(icono: Icons.shopping_bag_outlined, titulo: 'Mis compras'),
           ItemDrawer(icono: Icons.account_circle_outlined, titulo: 'Mi cuenta'),
@@ -69,10 +79,12 @@ class ItemDrawer extends StatelessWidget {
   final String titulo;
   final IconData icono;
   final bool nuevo;
+  final Function onTap;
   const ItemDrawer({
     this.titulo,
     this.icono,
-    this.nuevo=false,
+    this.onTap,
+    this.nuevo = false,
     Key key,
   }) : super(key: key);
 
@@ -111,7 +123,11 @@ class ItemDrawer extends StatelessWidget {
                       left: Radius.circular(10), right: Radius.circular(10))),
             )
           : null,
-      onTap: () {},
+      onTap: () {
+        if (this.onTap != null) {
+          this.onTap();
+        }
+      },
     );
   }
 }
