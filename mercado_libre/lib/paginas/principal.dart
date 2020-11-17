@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mercado_libre/main.dart';
+import 'package:mercado_libre/paginas/carrito.dart';
 import 'package:mercado_libre/widgets/appBar.dart';
 import 'package:mercado_libre/widgets/barraBusqueda.dart';
 import 'package:mercado_libre/widgets/categorias.dart';
@@ -46,6 +47,10 @@ class _PrincipalState extends State<Principal> {
         'https://http2.mlstatic.com/D_NQ_NP_2X_815758-MLM43677595245_102020-F.webp',
         'https://http2.mlstatic.com/D_NQ_NP_2X_834147-MLM43677567418_102020-F.webp',
         'https://http2.mlstatic.com/D_NQ_NP_2X_626777-MLM43677555518_102020-F.webp',
+      ],
+      'caracteristicas': [
+        {'nombre': 'Color', 'op': 'Banco'},
+        {'nombre': 'Nombre del diseño', 'op': 'Wii'},
       ]
     },
     {
@@ -64,6 +69,11 @@ class _PrincipalState extends State<Principal> {
         'https://http2.mlstatic.com/D_NQ_NP_2X_697975-MLA43485074637_092020-F.webp',
         'https://http2.mlstatic.com/D_NQ_NP_2X_847377-MLA43485074639_092020-F.webp',
         'https://http2.mlstatic.com/D_NQ_NP_2X_709231-MLA43485157395_092020-F.webp'
+      ],
+      'caracteristicas': [
+        {'nombre': 'Es Dual SIM', 'op': 'No'},
+        {'nombre': 'Memoria RAM', 'op': '4 GB'},
+        {'nombre': 'Color', 'op': 'Twilight Blue'},
       ]
     },
   ];
@@ -75,9 +85,12 @@ class _PrincipalState extends State<Principal> {
       initialPage: 5,
     );
     timer = Timer.periodic(Duration(seconds: 5), (timer) {
-      pageController
-          .nextPage(duration: Duration(milliseconds: 600), curve: Curves.ease)
-          .catchError(() {});
+      if (pageKey.currentContext != null)
+        pageController
+            .nextPage(duration: Duration(milliseconds: 600), curve: Curves.ease)
+            .catchError((err) {
+          print(err);
+        });
     });
     super.initState();
   }
@@ -94,10 +107,17 @@ class _PrincipalState extends State<Principal> {
     return Scaffold(
       appBar: AppbarML(
         title: BarraBusqueda(),
+        bottom: Direccion(direccion: 'Ingresa tu código postal'),
         actions: [
           IconButton(
             icon: Icon(Icons.shopping_cart_outlined),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) {
+                    return Carrito();
+                  },
+                  settings: RouteSettings(name: Carrito.routeName)));
+            },
           ),
         ],
       ),
