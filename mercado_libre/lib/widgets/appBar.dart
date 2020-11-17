@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mercado_libre/main.dart';
-import 'package:mercado_libre/widgets/barraBusqueda.dart';
-import 'package:mercado_libre/widgets/search_delegate.dart';
 
 class AppbarML extends StatefulWidget implements PreferredSizeWidget {
   final List<Widget> actions;
   final String direccion;
+  final Widget title;
   AppbarML({
     Key key,
     this.actions,
+    this.title,
     this.direccion = 'Ingresa tu código postal',
   })  : preferredSize = Size.fromHeight(kToolbarHeight * 1.8),
         super(key: key);
@@ -26,7 +26,7 @@ class _AppbarMLState extends State<AppbarML> {
       actionsIconTheme: IconThemeData(color: colores['grisOscuro']),
       iconTheme: IconThemeData(color: colores['grisOscuro']),
       backgroundColor: colores['amarillo'],
-      title: BarraBusqueda(),
+      title: widget.title,
       elevation: 0,
       actions: this.widget.actions,
       bottom: PreferredSize(
